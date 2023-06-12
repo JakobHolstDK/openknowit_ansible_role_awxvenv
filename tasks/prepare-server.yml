@@ -23,7 +23,6 @@
                 'xmlsec1-openssl',
                 '@Development Tools',
                 'python3.9',
-                'ansible-collection-ansible-posix',
                 'supervisor',
                 'postgresql-server'
         ]
