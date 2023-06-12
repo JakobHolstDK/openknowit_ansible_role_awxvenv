@@ -17,7 +17,6 @@
                 'lvm2',
                 'bzip2',
                 'python3-pip',
-                'ansible',
                 'gcc',
                 'openldap-devel',
                 'xmlsec1-openssl',
