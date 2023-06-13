@@ -118,7 +118,7 @@
 
 - name: "prepare-server | Copy awx to /opt/awx-{{ awx_image_version }}"
   ansible.builtin.copy:
-    src: "/var/tmp/awx-{{ awx_image_version }}"
+    src: "/opt/awx/git/awx-{{ awx_image_version }}"
     dest: "/opt/awx"
     owner: "{{ awx_user }}"
     group: "{{ awx_user }}"
