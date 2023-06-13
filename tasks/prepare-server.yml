@@ -125,12 +125,6 @@
     remote_src: True
   become: True
 
-- name: "prepate-server | delete temporary dir"
-  ansible.builtin.file:
-    path: /var/tmp/awx-{{ awx_image_version }}"
-    state: absent
-  become: True
-
 - name: "prepare-server | Recursively change ownership of the directory /etc/tower/conf.d"
   ansible.builtin.file:
     path: /etc/tower/conf.d
@@ -160,7 +154,7 @@
 
 - name: "prepare-server | Recursirely change ownership of the directory /tmp/awx"
   ansible.builtin.file:
-    path: "/opt/awx-{{ awx_image_version }}"
+    path: "/opt/awx
     state: directory
     recurse: yes
     owner: "{{ awx_user }}"
