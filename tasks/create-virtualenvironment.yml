@@ -1,0 +1,12 @@
+- name: Create Python3-virtual environment folder
+  file:
+    name: /opt/awxvenv
+    state: directory
+
+
+- name: Initiate virtualenv
+  pip:
+    virtualenv: /opt/awxvenv
+    virtualenv_python: python3.9
+
+    
