@@ -91,7 +91,7 @@
 - name: "prepate-server | ensure dir exists"
   ansible.builtin.file:
     path: /opt/awx/git
-    state: present
+    state: directory
     owner: "{{ awx_user }}"
     group: "{{ awx_user }}"
     mode: "u=rwx,g=rwx,o=r"
@@ -112,7 +112,7 @@
   become: True
   become_user: "{{ awx_user }}"
   when: git_dir.stat.exists == False
-  
+
 
 - name: "prepare-server | Copy awx to /opt/awx-{{ awx_image_version }}"
   ansible.builtin.copy:
