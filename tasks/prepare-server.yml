@@ -168,7 +168,7 @@
 
 - name: "prepare-server | install python requirements"
   ansible.builtin.command:
-    cmd: /opt/awx/venv/awx/bin/pip install /opt/awx/ --upgrade
+    cmd: /opt/awx/venv/awx/bin/pip install /opt/awx/current" --upgrade
   become: True  
 
 
