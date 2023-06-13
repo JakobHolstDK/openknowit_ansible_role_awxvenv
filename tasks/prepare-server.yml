@@ -113,7 +113,6 @@
     version: "{{ awx_image_version }}"
     force: True
   become: True
-  become_user: "{{ awx_user }}"
   when: git_dir.stat.exists == False
 
 
