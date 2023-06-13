@@ -85,7 +85,7 @@
   ansible.builtin.tempfile:
     state: directory
     suffix: build
-    register: tempdir
+  register: tempdir
 
 
 - name: "prepare-server | Git checkout awx"
@@ -126,7 +126,7 @@
 
 - name: "prepare-server | Recursirely change ownership of the directory /tmp/awx"
   ansible.builtin.file:
-    path: "/tmp/{{ project }}"
+    path: "{{ tempdir }}/{{ project }}"
     state: directory
     recurse: yes
     owner: "{{ awx_user }}"
