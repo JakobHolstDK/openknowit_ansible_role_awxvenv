@@ -1,8 +1,14 @@
+
+- name: "main | install awx versionized| setup awx requirement services"
+  command: "pip install  -r requirements/requirements.txt"
+  args:
+    chdir: "/opt/awx/current"
+  become: True
+  when: awx_image_version is defined
+
 - name: "main | install awx versionized| setup awx services"
   command: "pip install ."
   args:
     chdir: "/opt/awx/current"
   become: True
   when: awx_image_version is defined
-
-
