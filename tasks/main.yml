@@ -1,6 +1,9 @@
 - name: "main | Prepare server"
   import_tasks: prepare-server.yml 
 
+- name: "main | install awx versionized"
+  import_tasks: install_awx_versionized.yml
+  
 - name: "main | install postgress"
   import_tasks: install-postgres.yml 
 
