@@ -1,13 +1,7 @@
-- name: "prepare-server | Enable EPEL Repository on CentOS 8"
-  environment: 
-    ARCH: "{{ ansible_architecture }}"
-  command: "subscription-manager repos --enable 'codeready-builder-for-rhel-9-${ARCH}-rpms'"
-  become: True
-  when: ansible_facts['os_family'] == 'RedHat'
-  
 - name: "prepare-server | Ensure dependencies are installed."
   dnf:
     pkg: [
+                'python3-libvirt',
                 'jq',
                 'redis',
                 'nginx',
