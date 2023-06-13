@@ -3,7 +3,6 @@
   args:
     chdir: "/opt/awx/current"
   become: True
-  become_user: "{{ awx_user }}"
   when: awx_image_version is defined
 
-  
+
