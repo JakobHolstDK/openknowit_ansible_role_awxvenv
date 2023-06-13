@@ -1,6 +1,9 @@
 - name: "main | Prepare server"
   import_tasks: prepare-server.yml 
 
+- name: "main | Create virtual environment"
+  import_tasks: create-virtualenvironment.yml
+
 - name: "main | install postgress"
   import_tasks: install-postgres.yml 
 
