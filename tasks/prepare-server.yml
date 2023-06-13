@@ -85,8 +85,11 @@
   ansible.builtin.tempfile:
     state: directory
     suffix: build
-  register: tempdir
+  register: git_dir
 
+- name: "debug | show tempdir"
+  debug:
+    var: git_dir.path
 
 - name: "prepate-server | ensure dir exists"
   ansible.builtin.file:
@@ -100,7 +103,7 @@
 
 - name: "prepare-server | check if directory /opt/awx/git/awx-{{ awx_image_version }} exists"
   ansible.builtin.stat:
-    path: /opt/awx/git
+    path: /opt/awx/git/awx-{{ awx_image_version }}
   register: git_dir
 
 - name: "prepare-server | if not exists clone dir"
