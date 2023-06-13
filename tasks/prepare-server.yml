@@ -127,7 +127,7 @@
 
 - name: "prepare-server | link to /opt/awx/current"
   ansible.builtin.file:
-    src: "/opt/awx-{{ awx_image_version }}"
+    src: "/opt/awx/awx-{{ awx_image_version }}"
     dest: "/opt/awx/current"
     state: link
     owner: "{{ awx_user }}"
