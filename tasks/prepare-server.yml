@@ -90,7 +90,7 @@
 
 - name: "prepate-server | delete temporary dir"
   ansible.builtin.file:
-    path: /var/tmp/awx-{{ awx_image_version }"
+    path: /var/tmp/awx-{{ awx_image_version }}"
     state: absent
   become: True
 
@@ -114,7 +114,7 @@
 
 - name: "prepate-server | delete temporary dir"
   ansible.builtin.file:
-    path: /var/tmp/awx-{{ awx_image_version }"
+    path: /var/tmp/awx-{{ awx_image_version }}"
     state: absent
   become: True
 
