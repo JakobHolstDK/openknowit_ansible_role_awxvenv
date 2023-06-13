@@ -125,6 +125,15 @@
     remote_src: True
   become: True
 
+- name: "prepare-server | link to /opt/awx/current"
+  ansible.builtin.file:
+    src: "/opt/awx-{{ awx_image_version }}"
+    dest: "/opt/awx/current"
+    state: link
+    owner: "{{ awx_user }}"
+    group: "{{ awx_user }}"
+  become: True
+
 - name: "prepare-server | Recursively change ownership of the directory /etc/tower/conf.d"
   ansible.builtin.file:
     path: /etc/tower/conf.d
