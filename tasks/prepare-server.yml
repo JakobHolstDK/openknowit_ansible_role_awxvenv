@@ -132,6 +132,7 @@
     state: link
     owner: "{{ awx_user }}"
     group: "{{ awx_user }}"
+    force: True
   become: True
 
 - name: "prepare-server | Recursively change ownership of the directory /etc/tower/conf.d"
