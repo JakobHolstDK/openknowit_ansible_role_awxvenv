@@ -88,14 +88,35 @@
   register: tempdir
 
 
+- name: "prepate-server | delete temporary dir"
+  ansible.builtin.file:
+    path: /var/tmp/awx-{{ awx_image_version }"
+    state: absent
+  become: True
+
 - name: "prepare-server | Git checkout awx"
   ansible.builtin.git:
     repo: 'https://github.com/ansible/awx.git'
-    dest: "/opt/awx-{{ awx_image_version }}"
+    dest: "/var/tmp/awx-{{ awx_image_version }}"
     version: "{{ awx_image_version }}"
     force: True
   become: True
   become_user: "{{ awx_user }}"
+
+- name: "prepare-server | Copy awx to /opt/awx-{{ awx_image_version }}"
+  ansible.builtin.copy:
+    src: "/var/tmp/awx-{{ awx_image_version }}"
+    dest: "/opt/awx"
+    owner: "{{ awx_user }}"
+    group: "{{ awx_user }}"
+    remote_src: True
+  become: True
+
+- name: "prepate-server | delete temporary dir"
+  ansible.builtin.file:
+    path: /var/tmp/awx-{{ awx_image_version }"
+    state: absent
+  become: True
 
 - name: "prepare-server | Recursively change ownership of the directory /etc/tower/conf.d"
   ansible.builtin.file:
