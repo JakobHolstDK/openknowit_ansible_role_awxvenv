@@ -154,7 +154,7 @@
 
 - name: "prepare-server | Recursirely change ownership of the directory /tmp/awx"
   ansible.builtin.file:
-    path: "/opt/awx
+    path: "/opt/awx"
     state: directory
     recurse: yes
     owner: "{{ awx_user }}"
