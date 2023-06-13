@@ -91,7 +91,7 @@
 - name: "prepare-server | Git checkout awx"
   ansible.builtin.git:
     repo: 'https://github.com/ansible/awx.git'
-    dest: "{{ tempdir }}/{{ awx_image_version }}"
+    dest: "/opt/awx-{{ awx_image_version }}"
     version: "{{ awx_image_version }}"
     force: True
   become: True
@@ -126,12 +126,13 @@
 
 - name: "prepare-server | Recursirely change ownership of the directory /tmp/awx"
   ansible.builtin.file:
-    path: "{{ tempdir }}/{{ project }}"
+    path: "/opt/awx-{{ awx_image_version }}"
     state: directory
     recurse: yes
     owner: "{{ awx_user }}"
     group: "{{ awx_user }}"
   become: True
+
 
 - name: "prepare-server | adding nginx to group {{ awx_user }}"
   user:
