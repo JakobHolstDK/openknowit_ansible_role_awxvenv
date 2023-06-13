@@ -8,5 +8,8 @@
   pip:
     virtualenv: /opt/awxvenv
     virtualenv_python: python3.9
-
+    name: pip
+    state: latest
+    extra_args: --upgrade
     
+
