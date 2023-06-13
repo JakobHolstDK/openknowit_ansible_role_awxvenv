@@ -88,20 +88,31 @@
   register: tempdir
 
 
-- name: "prepate-server | delete temporary dir"
+- name: "prepate-server | ensure dir exists"
   ansible.builtin.file:
-    path: /var/tmp/awx-{{ awx_image_version }}"
-    state: absent
+    path: /opt/awx/git
+    state: present
+    owner: "{{ awx_user }}"
+    group: "{{ awx_user }}"
+    mode: "u=rwx,g=rwx,o=r"
   become: True
 
-- name: "prepare-server | Git checkout awx"
+
+- name: "prepare-server | check if directory /opt/awx/git/awx-{{ awx_image_version }} exists"
+  ansible.builtin.stat:
+    path: /opt/awx/git
+  register: git_dir
+
+- name: "prepare-server | if not exists clone dir"
   ansible.builtin.git:
     repo: 'https://github.com/ansible/awx.git'
-    dest: "/var/tmp/awx-{{ awx_image_version }}"
+    dest: "/opt/awx/git/awx-{{ awx_image_version }}"
     version: "{{ awx_image_version }}"
     force: True
   become: True
   become_user: "{{ awx_user }}"
+  when: git_dir.stat.exists == False
+  
 
 - name: "prepare-server | Copy awx to /opt/awx-{{ awx_image_version }}"
   ansible.builtin.copy:
