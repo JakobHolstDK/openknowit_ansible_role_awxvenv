@@ -152,6 +152,16 @@
     group: "{{ awx_user }}"
   become: True
 
+- name: "prepare-server | create python virtualenv"
+  ansible.builtin.command:
+    cmd: python3.9 -m venv /opt/awx/venv/awx
+  become: True
+
+- name: "prepare-server | install python requirements"
+  ansible.builtin.command:
+    cmd: /opt/awx/venv/awx/bin/pip install /opt/awx/ --upgrade
+  become: True  
+
 
 - name: "prepare-server | adding nginx to group {{ awx_user }}"
   user:
