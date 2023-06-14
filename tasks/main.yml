@@ -3,15 +3,15 @@
 
 - name: "main | install awx versionized"
   import_tasks: install_awx_versionized.yml
-  
+
 - name: "main | install postgress"
   import_tasks: install-postgres.yml 
 
-#- name: "main | install redis"
-#  import_tasks: install-redis.yml 
+- name: "main | install redis"
+  import_tasks: install-redis.yml 
 
-#- name: "main | install nginx"
-#  import_tasks: nginx.yml
+- name: "main | install nginx"
+  import_tasks: nginx.yml
 
 #- name: "main | setup awx services"
 #  import_tasks: install-awx-from-source.yml
