@@ -1,20 +1,14 @@
 - name: Install django-debug-toolbar 
   ansible.builtin.command: "pip install django-debug-toolbar"
   become: true
-  args:
-    chdir:  "/tmp/{{ awx_user }}/{{ awx_image_version }}"
 
 - name: Install django-rest-swagger
   ansible.builtin.command: "pip install django-rest-swagger"
   become: true
-  args:
-    chdir:  "/tmp/{{ awx_user }}/{{ awx_image_version }}"
 
 - name: Install ansible runner
   ansible.builtin.command: "pip install ansible_runner"
   become: true
-  args:
-    chdir:  "/tmp/{{ awx_user }}/{{ awx_image_version }}"
 
 - name: Git checkout nodejs
   ansible.builtin.git:
@@ -58,7 +52,7 @@
 - name: Build AWX sdist
   ansible.builtin.command: /usr/local/bin/build_awx_sdist.sh
   args:
-    chdir:  "/tmp/{{ awx_user }}/{{ awx_image_version }}"
+    chdir:  "/opt/awx/current"
   become: True
   
   
