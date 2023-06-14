@@ -12,7 +12,7 @@
     groups: awx
     append: yes
   become: True
-  
+
 
 - name: destroy database
   ansible.builtin.shell:
@@ -32,6 +32,12 @@
   find: paths="{{ postgresdata }}" file_type=directory patterns="*"
   register: dir_files
   become: True
+
+- name: "debug | show dir_files"
+  debug:
+    var: "{{ postgresdata }}"
+    
+
 
 - name:  run initdb
   ansible.builtin.shell:
