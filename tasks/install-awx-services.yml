@@ -1,17 +1,17 @@
 - name: Install django-debug-toolbar 
-  ansible.builtin.command: "{{ venv }}/bin/pip install django-debug-toolbar"
+  ansible.builtin.command: "pip install django-debug-toolbar"
   become: true
   args:
     chdir:  "/tmp/{{ awx_user }}/{{ awx_image_version }}"
 
 - name: Install django-rest-swagger
-  ansible.builtin.command: "{{ venv }}/bin/pip install django-rest-swagger"
+  ansible.builtin.command: "pip install django-rest-swagger"
   become: true
   args:
     chdir:  "/tmp/{{ awx_user }}/{{ awx_image_version }}"
 
 - name: Install ansible runner
-  ansible.builtin.command: "{{ venv }}/bin/pip install ansible_runner"
+  ansible.builtin.command: "pip install ansible_runner"
   become: true
   args:
     chdir:  "/tmp/{{ awx_user }}/{{ awx_image_version }}"
@@ -269,7 +269,7 @@
 #  failed_when: awxprepare_cmd.rc == 1
 #  changed_when: awxprepare_cmd.rc == 0
 - name: Force superuser on awx
-  command: "{{ venv }}/bin/awx-manage  createsuperuser  --username {{ awx_admin_user }} --email {{ awx_admin_email }} --noinput"
+  command: "awx-manage  createsuperuser  --username {{ awx_admin_user }} --email {{ awx_admin_email }} --noinput"
   register: createsuperuser_cmd
   failed_when: createsuperuser_cmd.rc == 1
   changed_when: createsuperuser_cmd.rc == 0
@@ -280,7 +280,7 @@
 - name: Migrate if needed
   environment: 
     GIT_PYTHON_REFRESH: quiet
-  command: "{{ venv }}/bin/awx-manage migrate"
+  command: "awx-manage migrate"
   args:
     chdir: "{{ destination }}"
   register: migrate_cmd
@@ -292,7 +292,7 @@
 - name: "collect statics"
   environment: 
     GIT_PYTHON_REFRESH: quiet
-  command: "{{ venv }}/bin/awx-manage collectstatic --noinput --clear -v0"
+  command: "awx-manage collectstatic --noinput --clear -v0"
   args:
     chdir: "{{ destination }}"
   register: migrate_cmd
@@ -323,7 +323,7 @@
 - name: "Provision instance"
   environment: 
     GIT_PYTHON_REFRESH: quiet
-  command: "{{ venv }}/bin/awx-manage  provision_instance --hostname={{ ansible_hostname }}"
+  command: "awx-manage  provision_instance --hostname={{ ansible_hostname }}"
   args:
     chdir: "{{ destination }}"
   register: migrate_cmd
@@ -335,7 +335,7 @@
 - name: "Register quename"
   environment: 
     GIT_PYTHON_REFRESH: quiet
-  command: "{{ venv }}/bin/awx-manage  register_queue --queuename=tower --hostname={{ ansible_hostname }}"
+  command: "awx-manage  register_queue --queuename=tower --hostname={{ ansible_hostname }}"
   args:
     chdir: "{{ destination }}"
   register: migrate_cmd
@@ -436,7 +436,7 @@
     - awx-wsbroadcast
 
 - name: Run pip freeze
-  shell: "{{ venv }}/bin/pip freeze >/tmp/awxrpm.requirements.txt"
+  shell: "pip freeze >/tmp/awxrpm.requirements.txt"
   become_user: awx
   become: True
 
