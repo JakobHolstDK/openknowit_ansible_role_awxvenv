@@ -205,7 +205,7 @@
 
 - name: Create tmpfiles.d entry for rsyslog socket directory
   template:
-    src: rsyslog_tmpd.conf
+    src: rsyslog_tmpd.conf.j2
     dest: /etc/tmpfiles.d/rsyslog.conf
     force: yes
     mode: '0640'
