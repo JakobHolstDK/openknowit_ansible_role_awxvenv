@@ -9,7 +9,15 @@
   ansible.builtin.shell:
     cmd: rm -fr  /var/lib/pgsql/data
   become: True
-  
+
+- name: create postgres data dir
+  ansible.builtin.file:
+    path: "{{ postgresdata }}"
+    state: directory
+    owner: postgres
+    group: postgres
+    mode: '0700'
+  become: True
   
 - name: "are we new"
   find: paths="{{ postgresdata }}" file_type=directory patterns="*"
