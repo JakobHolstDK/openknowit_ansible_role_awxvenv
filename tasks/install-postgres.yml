@@ -5,9 +5,18 @@
     enabled: yes
   become: True   
 
+#ensure postgres is member of the awx group
+- name: "setup-postgress | ensure postgres is member of the awx group"
+  ansible.builtin.user:
+    name: postgres
+    groups: awx
+    append: yes
+  become: True
+  
+
 - name: destroy database
   ansible.builtin.shell:
-    cmd: rm -fr  /var/lib/pgsql/data
+    cmd: rm -fr  "{{ postgresdata }}"
   become: True
 
 - name: create postgres data dir
