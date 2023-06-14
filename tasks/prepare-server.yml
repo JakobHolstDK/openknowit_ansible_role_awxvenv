@@ -19,7 +19,8 @@
                 'python3.9',
                 'postgresql-server',
                 'python3-devel',
-                'git'
+                'git',
+                'libffi-devel'
         ]
   become: true
   when: ansible_facts['os_family'] == 'RedHat'
