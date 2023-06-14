@@ -89,7 +89,7 @@
 
 - name: Restart service postgres, if not restarted
   ansible.builtin.service:
-    name: postgresql-12 
+    name: postgresql
     state: restarted
     enabled: yes
   become: True   
