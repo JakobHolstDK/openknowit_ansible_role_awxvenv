@@ -18,7 +18,7 @@
 
 - name:  run initdb
   ansible.builtin.shell:
-    cmd: /usr/bin/initdb 
+    cmd: /usr/bin/initdb  -D "{{ postgresdata }}"
   when: dir_files.matched|int == 0
   become: True
 
