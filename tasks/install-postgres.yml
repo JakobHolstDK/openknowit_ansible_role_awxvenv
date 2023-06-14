@@ -29,6 +29,7 @@
     cmd: /usr/bin/initdb  -D "{{ postgresdata }}"
   when: dir_files.matched|int == 0
   become: True
+  become_user: postgres
 
 - name: Pause for 5 seconds to settle
   pause:
