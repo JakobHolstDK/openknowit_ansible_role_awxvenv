@@ -295,16 +295,6 @@
   become_user: "{{ awx_user }}"
   become: True
 
-- name: "set pg_hba.conf to default"
-  ansible.builtin:
-    src: templates/pg_hba.conf.j2
-    dest: /var/lib/awx/pg_hba.conf
-    force: yes
-    mode: '0640'
-    owner: awx
-    group: awx
-  become: True
-
 - name: Set password for PostgreSQL user
   become: true
   become_user: postgres
