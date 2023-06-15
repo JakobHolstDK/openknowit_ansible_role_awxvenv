@@ -71,9 +71,16 @@
   become: True
   become_user: postgres
 
-- name: set password 
+- name: set password  postgres
   ansible.builtin.shell:
-    cmd: psql -c "ALTER USER awx PASSWORD '{{ awx_db_password }}';"
+    cmd: psql -c "ALTER USER postgres PASSWORD '{{ postgres_db_password }}';"
+  when: dir_files.matched|int == 0
+  become: True
+  become_user: postgres
+
+- name: set password awx
+  ansible.builtin.shell:
+    cmd: psql -c "ALTER USER {{ awx_db_user }} PASSWORD '{{ awx_db_password }}';"
   when: dir_files.matched|int == 0
   become: True
   become_user: postgres
