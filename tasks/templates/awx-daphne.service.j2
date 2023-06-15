@@ -1,0 +1,18 @@
+[Unit]
+Description=AWX daphne service
+PartOf=awx.service
+After=awx.service
+
+[Service]
+User="{{ awx_user }}"
+Group="{{ awx_user }}"
+EnvironmentFile=-/etc/sysconfig/awx
+Environment=AWX_SETTINGS_FILE=/etc/tower/settings.py
+Environment=PATH=/bin:/sbin:/usr/bin:/usr/sbin:"{{ venv }}/bin"
+PermissionsStartOnly=true
+ExecStart="{{ venv }}/bin/daphne -u /var/run/tower/daphne.sock awx.asgi:channel_layer"
+Restart=on-failure
+RestartSec=2s
+
+[Install]
+WantedBy=awx.service

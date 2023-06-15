@@ -1,0 +1,20 @@
+[Unit]
+Description=AWX Dispatcher
+After=syslog.target network.target
+PartOf=awx.service
+After=awx.service
+
+[Service]
+User="{{ awx_user }}"
+Group="{{awx_user }}"
+EnvironmentFile=-/etc/sysconfig/awx
+Environment=AWX_SETTINGS_FILE=/etc/tower/settings.py
+Environment=PATH="/bin:/sbin:/usr/bin:/usr/sbin:{{ venv }}/bin"
+PermissionsStartOnly=true
+ExecStart="{{ venv }}/bin/awx-manage run_dispatcher"
+Restart=on-failure
+RestartSec=2s
+
+[Install]
+WantedBy=awx.service
+
