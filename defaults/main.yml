@@ -1,6 +1,7 @@
 awx_image_version: "19.4.0"
 awx_user: "awx"
 awx_db_name: "awx"
+awx_db_user: "awx"
 awx_db_host: "127.0.0.1"
 awx_db_password: "dsfsdfds"
 awxpassword: "awx2know"
