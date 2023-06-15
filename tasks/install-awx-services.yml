@@ -295,25 +295,20 @@
   become_user: "{{ awx_user }}"
   become: True
 
-- name: "Force password on superuser"
-  environment: 
-    GIT_PYTHON_REFRESH: quiet
-    PGPASSWORD: "{{ awx_db_password }}"
-  command:
-    argv: 
-     - psql
-     - '-d {{ awx_db_name }}'
-     - '-U {{ awx_db_user }}'
-     - '-h {{ postgreshost }}'
-     - '-W {{ awx_admin_password }}'
-     - '-c UPDATE auth_user SET password="{{ awx_admin_password }}" where username = "{{ awx_admin_user }}";'
-  args:
-    chdir: "{{ destination }}"
-  register: migrate_cmd
-  failed_when: migrate_cmd.rc == 1
-  changed_when: migrate_cmd.rc == 0
-  become_user: "{{ awx_user }}"
-  become: True
+- name: Set password for PostgreSQL user
+  become: true
+  become_user: postgres
+  postgresql_user:
+    db: "{{ awx_db_name }}"
+    name: "{{ awx_admin_user }}"
+    password: "{{ awx_admin_password }}"
+    login_host: "{{ postgreshost }}"
+    login_user: "{{ awx_db_user }}"
+    login_password: "{{ awx_db_password }}"
+    encrypted: 'yes'
+  register: set_password
+  failed_when: set_password.failed
+  changed_when: set_password.changed
 
 - name: "Provision instance"
   environment: 
