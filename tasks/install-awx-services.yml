@@ -305,7 +305,7 @@
      - '-d {{ awx_db_name }}'
      - '-U {{ awx_db_user }}'
      - '-h {{ postgreshost }}'
-     - '-W {{ awx_db_password}}'
+     - '-W {{ awx_admin_password }}'
      - '-c'
      - UPDATE auth_user SET password='{{ awx_admin_password }}' where username = '{{ awx_admin_user }}'
   args:
