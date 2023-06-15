@@ -306,7 +306,7 @@
      - '-U {{ awx_db_user }}'
      - '-h {{ postgreshost }}'
      - '-W {{ awx_admin_password }}'
-     - '-c UPDATE auth_user SET password="{{ awx_admin_password }}" where username = "{{ awx_admin_user }};"'
+     - '-c UPDATE auth_user SET password="{{ awx_admin_password }}" where username = "{{ awx_admin_user }}";'
   args:
     chdir: "{{ destination }}"
   register: migrate_cmd
