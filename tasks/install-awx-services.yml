@@ -303,8 +303,7 @@
     name: "{{ awx_admin_user }}"
     password: "{{ awx_admin_password }}"
     login_host: "{{ postgreshost }}"
-    login_user: "{{ awx_db_user }}"
-    login_password: "{{ awx_db_password }}"
+    login_user: "postgres"
     encrypted: 'yes'
   register: set_password
   failed_when: set_password.failed
