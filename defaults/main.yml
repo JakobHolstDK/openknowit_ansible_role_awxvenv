@@ -6,7 +6,7 @@ awx_db_host: "127.0.0.1"
 awx_db_password: "dsfsdfds"
 postgres_db_password: "dsfsdfds"
 awxpassword: "awx2know"
-postgreshost: "awxserver"
+postgreshost: "127.0.0.1"
 postgresdata: "/var/lib/awx/data"
 nginx_disable_https: True
 nginx_http_port: 80
