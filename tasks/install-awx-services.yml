@@ -233,6 +233,18 @@
     group: awx
   become: True
 
+- name : create awxwebservice script
+  template: 
+    src: awxwebservice.sh.j2
+    dest: /usr/local/bin/awxwebservice.sh
+    force: yes
+    mode: '0770'
+    owner: awx
+    group: awx
+  become: True
+  
+  
+
 
 #- name: Change file permission on var lib awx
 #  file:
