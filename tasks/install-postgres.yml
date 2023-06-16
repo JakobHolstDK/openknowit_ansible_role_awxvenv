@@ -59,7 +59,7 @@
 
 - name:  run  create postgres user
   ansible.builtin.shell:
-    cmd: createuser awx
+    cmd: psql -c "create role {{ awx_db_user }} with login password '{{ awx_db_password }}';"
   when: dir_files.matched|int == 0
   become: True
   become_user: postgres
@@ -78,13 +78,6 @@
   become: True
   become_user: postgres
 
-- name: set password awx
-  ansible.builtin.shell:
-    cmd: psql -c "ALTER USER {{ awx_db_user }} PASSWORD '{{ awx_db_password }}';"
-  when: dir_files.matched|int == 0
-  become: True
-  become_user: postgres
-  
 - name: create postgress access
   ansible.builtin.template:
     src: templates/pg_hba.conf.j2
