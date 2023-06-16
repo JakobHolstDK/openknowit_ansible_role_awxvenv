@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+/usr/local/bin/uwsgi \
+--socket /var/run/tower/uwsgi.sock \
+--module=awx.wsgi:application \
+--stats /var/lib/awx/uwsgi.stats \
+--chmod-socket=660 \
+--vacuum \
+--master \
+--no-orphans \
+--buffer-size=32768 \
+--workers=16 \
+--worker-reload-mercy=30 \
+--harakiri=120 \
+--max-worker-lifetime=3600 \
+--max-requests=100000 \
+--reload-on-rss=1024 \
+--cheaper=4 \
+--cheaper-algo=busyness \
+--cheaper-initial=4 \
+--cheaper-step=2
