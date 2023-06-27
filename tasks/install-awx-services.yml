@@ -10,33 +10,33 @@
   ansible.builtin.command: "pip install ansible_runner"
   become: true
 
-- name: Git checkout nodejs
-  ansible.builtin.git:
-    repo: 'https://github.com/nodejs/node.git'
-    dest: "/tmp/nodejs/{{ nodejsversion }}"
-    version: '{{ nodejsversion }}'
-  become: true
-  become_user: "{{ awx_user }}"
+#- name: Git checkout nodejs
+#  ansible.builtin.git:
+#    repo: 'https://github.com/nodejs/node.git'
+#    dest: "/tmp/nodejs/{{ nodejsversion }}"
+#    version: '{{ nodejsversion }}'
+#  become: true
+#  become_user: "{{ awx_user }}"
 
-- name: Configure nodejs
-  ansible.builtin.command: ./configure
-  args:
-    chdir: "/tmp/nodejs/{{ nodejsversion }}"
-  become: true
-  become_user: "{{ awx_user }}"
+#- name: Configure nodejs
+#  ansible.builtin.command: ./configure
+#  args:
+#    chdir: "/tmp/nodejs/{{ nodejsversion }}"
+#  become: true
+#  become_user: "{{ awx_user }}"
 
-- name: compile nodejs
-  ansible.builtin.command: "make -j {{ ansible_processor_vcpus}}"
-  args:
-    chdir: "/tmp/nodejs/{{ nodejsversion }}"
-  become: true
-  become_user: "{{ awx_user }}"
+#- name: compile nodejs
+#  ansible.builtin.command: "make -j {{ ansible_processor_vcpus}}"
+#  args:
+#    chdir: "/tmp/nodejs/{{ nodejsversion }}"
+# become: true
+#  become_user: "{{ awx_user }}"
 
-- name: Copy node binary
-  ansible.builtin.command: cp node /usr/bin/node
-  args:
-    chdir: "/tmp/nodejs/{{ nodejsversion }}"
-  become: true
+#- name: Copy node binary
+#  ansible.builtin.command: cp node /usr/bin/node
+#  args:
+#    chdir: "/tmp/nodejs/{{ nodejsversion }}"
+# become: true
 
 - name: Copy the build script
   template:

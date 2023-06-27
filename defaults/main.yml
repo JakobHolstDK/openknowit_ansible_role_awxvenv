@@ -1,4 +1,4 @@
-awx_image_version: "19.4.0"
+awx_image_version: "22.4.0"
 awx_user: "awx"
 awx_db_name: "awx"
 awx_db_user: "awx"
