@@ -44,14 +44,6 @@
     gid: 1666
   become: True
 
-- name: "prepare-server | Add the user {{ awx_user }} with a specific uid and a primary group of {{ awx_user }}"
-  ansible.builtin.user:
-    name: "{{ awx_user }}" 
-    comment: awx service accout
-    uid: 1666
-    group: "{{ awx_user }}"
-  become: true 
-
 - name: "prepare-server | Create log dir"
   file:
     path: /var/log/tower
@@ -98,40 +90,6 @@
     mode: "u=rwx,g=rwx,o=r"
   become: True
 
-
-- name: "prepare-server | check if directory /opt/awx/git/awx-{{ awx_image_version }} exists"
-  ansible.builtin.stat:
-    path: /opt/awx/git/awx-{{ awx_image_version }}
-  register: git_dir
-
-- name: "prepare-server | if not exists clone dir"
-  ansible.builtin.git:
-    repo: 'https://github.com/ansible/awx.git'
-    dest: "/opt/awx/git/awx-{{ awx_image_version }}"
-    version: "{{ awx_image_version }}"
-    force: True
-  become: True
-  when: git_dir.stat.exists == False
-
-
-- name: "prepare-server | Copy awx to /opt/awx-{{ awx_image_version }}"
-  ansible.builtin.copy:
-    src: "/opt/awx/git/awx-{{ awx_image_version }}"
-    dest: "/opt/awx"
-    owner: "{{ awx_user }}"
-    group: "{{ awx_user }}"
-    remote_src: True
-  become: True
-
-- name: "prepare-server | link to /opt/awx/current"
-  ansible.builtin.file:
-    src: "/opt/awx/awx-{{ awx_image_version }}"
-    dest: "/opt/awx/current"
-    state: link
-    owner: "{{ awx_user }}"
-    group: "{{ awx_user }}"
-    force: True
-  become: True
 
 - name: "prepare-server | Recursively change ownership of the directory /etc/tower/conf.d"
   ansible.builtin.file:
