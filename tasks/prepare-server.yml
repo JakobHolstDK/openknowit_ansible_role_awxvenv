@@ -40,7 +40,6 @@
       - gcc
       - libldap2-dev
       - xmlsec1
-      - python3.9
       - postgresql
       - python3-dev
       - git
