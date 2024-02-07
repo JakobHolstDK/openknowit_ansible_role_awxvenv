@@ -25,6 +25,32 @@
   become: true
   when: ansible_facts['os_family'] == 'RedHat'
 
+- name: "prepare-server | Install packages on ubuntu"
+  apt:
+    name:
+      - python3-libvirt
+      - jq
+      - redis
+      - nginx
+      - git
+      - gcc-c++
+      - npm
+      - device-mapper-persistent-data
+      - lvm2
+      - bzip2
+      - python3-pip
+      - gcc
+      - libldap2-dev
+      - xmlsec1
+      - python3.9
+      - postgresql
+      - python3-dev
+      - git
+      - libffi-dev
+    state: latest
+  become: true
+  when: ansible_facts['os_family'] == 'Debian'
+
 - name: "prepare-server | Install packages from powertools"
   yum:
     name:
