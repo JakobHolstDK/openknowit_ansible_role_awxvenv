@@ -34,7 +34,6 @@
       - nginx
       - git
       - npm
-      - device-mapper-persistent-data
       - lvm2
       - bzip2
       - python3-pip
@@ -46,6 +45,8 @@
       - python3-dev
       - git
       - libffi-dev
+      - libxmlsec1-dev
+      - libltdl-dev
     state: latest
   become: true
   when: ansible_facts['os_family'] == 'Debian'
@@ -69,9 +70,18 @@
     gid: 1666
   become: True
 
+- name: "prepare-server | Add the user {{ awx_user }}"
+  ansible.builtin.user:
+    name: "{{ awx_user }}"
+    state: present
+    group: "{{ awx_user }}"
+    shell: /bin/bash
+    home: /var/lib/awx
+  become: True  
+
 - name: "prepare-server | Create log dir"
   file:
-    path: /var/log/tower
+    path: /var/log/awx
     owner: "{{ awx_user }}"
     group: "{{ awx_user }}"
     state: directory
