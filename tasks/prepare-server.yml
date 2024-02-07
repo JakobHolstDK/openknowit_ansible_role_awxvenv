@@ -33,7 +33,6 @@
       - redis
       - nginx
       - git
-      - gcc-c++
       - npm
       - device-mapper-persistent-data
       - lvm2
